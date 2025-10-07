@@ -41,6 +41,29 @@ if (!pwd || pwd.length < 8 || !hasUpper || !hasNumber || !hasSymbol) {
   setValid(codigo);
 }
 
+const edad = document.getElementById('edad');
+const edadVal = Number(edad.value);
+
+if (!edad.value || isNaN(edadVal) || edadVal < 25 || edadVal > 50) {
+  setInvalid(edad, 'error-edad', 'Edad fuera del rango espacial (25-50).');
+  valid = false;
+} else {
+  setValid(edad);
+}
+
+const especialidadElems = Array.from(document.getElementsByName('especialidad'));
+const especialidadSeleccionada = especialidadElems.some(r => r.checked);
+
+if (!especialidadSeleccionada) {
+  document.getElementById('error-especialidad').textContent = 'Selecciona tu especialidad astronauta.';
+  especialidadElems.forEach(r => r.parentElement.classList.add('invalid'));
+  valid = false;
+} else {
+  especialidadElems.forEach(r => {
+    if (r.checked) r.parentElement.classList.add('valid');
+  });
+}
+
 
 
 
