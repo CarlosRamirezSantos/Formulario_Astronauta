@@ -117,6 +117,24 @@ if (!file) {
   }
 }
 
+const comentarios = document.getElementById('comentarios');
+const commVal = comentarios.value || '';
+if (commVal.trim().length > 0 && commVal.trim().length < 10) {
+  setInvalid(comentarios, 'error-comentarios', 'Comentarios demasiado cortos.');
+  valid = false;
+} else {
+  if (commVal.trim().length >= 10) setValid(comentarios);
+}
+
+const acepto = document.getElementById('acepto');
+if (!acepto.checked) {
+  document.getElementById('error-acepto').textContent = 'Debes aceptar los riesgos para continuar.';
+  valid = false;
+} else {
+  document.getElementById('error-acepto').textContent = '';
+}
+
+
 
 
 
