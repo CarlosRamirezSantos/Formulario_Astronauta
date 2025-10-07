@@ -18,6 +18,29 @@ if (!nombre.value || nombre.value.trim().length < 3) {
   setValid(nombre);
 }
 
+const email = document.getElementById('email');
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if (!email.value || !emailRegex.test(email.value)) {
+  setInvalid(email, 'error-email', 'Correo galáctico inválido.');
+  valid = false;
+} else {
+  setValid(email);
+}
+
+const codigo = document.getElementById('codigo');
+const pwd = codigo.value || '';
+const hasUpper = /[A-Z]/.test(pwd);
+const hasNumber = /[0-9]/.test(pwd);
+const hasSymbol = /[!@#$%&*]/.test(pwd);
+
+if (!pwd || pwd.length < 8 || !hasUpper || !hasNumber || !hasSymbol) {
+  setInvalid(codigo, 'error-codigo', 'Código rechazado: debe tener mayúscula, número y símbolo.');
+  valid = false;
+} else {
+  setValid(codigo);
+}
+
 
 
 
