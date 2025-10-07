@@ -88,6 +88,36 @@ if (!fecha.value) {
   }
 }
 
+const fisica = document.getElementById('fisica');
+const fisicaVal = Number(fisica.value);
+
+if (isNaN(fisicaVal) || fisicaVal < 7) {
+  setInvalid(fisica, 'error-fisica', 'Condición física insuficiente, mínimo 7.');
+  valid = false;
+} else {
+  setValid(fisica);
+}
+
+const expediente = document.getElementById('expediente');
+const file = expediente.files[0];
+
+if (!file) {
+  setInvalid(expediente, 'error-expediente', 'Sube un expediente médico en formato PDF.');
+  valid = false;
+} else {
+  const fileType = file.type;
+  const fileName = file.name || '';
+  const isPdfMime = fileType === 'application/pdf';
+  const isPdfExt = /\.pdf$/i.test(fileName);
+  if (!isPdfMime && !isPdfExt) {
+    setInvalid(expediente, 'error-expediente', 'Formato incorrecto: se requiere PDF.');
+    valid = false;
+  } else {
+    setValid(expediente);
+  }
+}
+
+
 
 
 
