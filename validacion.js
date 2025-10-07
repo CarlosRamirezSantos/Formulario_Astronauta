@@ -64,6 +64,30 @@ if (!especialidadSeleccionada) {
   });
 }
 
+const planeta = document.getElementById('planeta');
+if (!planeta.value) {
+  setInvalid(planeta, 'error-planeta', 'Selecciona tu planeta de origen.');
+  valid = false;
+} else {
+  setValid(planeta);
+}
+
+const fecha = document.getElementById('fecha');
+if (!fecha.value) {
+  setInvalid(fecha, 'error-fecha', 'Fecha inválida: debe ser futura.');
+  valid = false;
+} else {
+  const fechaVal = new Date(fecha.value);
+  const hoy = new Date();
+  hoy.setHours(0,0,0,0);
+  if (fechaVal <= hoy || isNaN(fechaVal.getTime())) {
+    setInvalid(fecha, 'error-fecha', 'Fecha inválida: debe ser futura.');
+    valid = false;
+  } else {
+    setValid(fecha);
+  }
+}
+
 
 
 
