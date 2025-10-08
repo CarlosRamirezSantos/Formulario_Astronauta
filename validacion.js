@@ -135,15 +135,41 @@ if (!acepto.checked) {
 }
 
 
-
-
-
-
+    const successDiv = document.getElementById('success-message');
+    if (valid) {
+      successDiv.textContent = '¡Todo ha sido correcto! Misión aprobada.'; 
+      
+    } else {
+      successDiv.textContent = ''; 
+    }
   });
 
   
   function clearErrorsAndStyles() {
     
+    const ids = ['nombre','email','codigo','edad','planeta','fecha','fisica','expediente','comentarios'];
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.classList.remove('valid','invalid');
+      }
+      const err = document.getElementById('error-' + id);
+      if (err) err.textContent = ''; 
+    });
+
+    
+    const especialidadElems = Array.from(document.getElementsByName('especialidad'));
+    especialidadElems.forEach(r => r.parentElement.classList.remove('valid','invalid'));
+    const errEsp = document.getElementById('error-especialidad');
+    if (errEsp) errEsp.textContent = '';
+
+    
+    const errAcep = document.getElementById('error-acepto');
+    if (errAcep) errAcep.textContent = '';
+
+
+    const successDiv = document.getElementById('success-message');
+    successDiv.textContent = '';
   }
 
 
