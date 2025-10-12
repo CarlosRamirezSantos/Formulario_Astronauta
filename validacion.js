@@ -1,0 +1,189 @@
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('astroForm');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    clearErrorsAndStyles();
+
+    let valid = true;
+
+
+const nombre = document.getElementById('nombre');
+
+if (!nombre.value || nombre.value.trim().length < 3) {
+  setInvalid(nombre, 'error-nombre', 'Acceso denegado: nombre demasiado corto.');
+  valid = false;
+} else {
+  setValid(nombre);
+}
+
+const email = document.getElementById('email');
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if (!email.value || !emailRegex.test(email.value)) {
+  setInvalid(email, 'error-email', 'Correo galáctico inválido.');
+  valid = false;
+} else {
+  setValid(email);
+}
+
+const codigo = document.getElementById('codigo');
+const pwd = codigo.value || '';
+const hasUpper = /[A-Z]/.test(pwd);
+const hasNumber = /[0-9]/.test(pwd);
+const hasSymbol = /[!@#$%&*]/.test(pwd);
+
+if (!pwd || pwd.length < 8 || !hasUpper || !hasNumber || !hasSymbol) {
+  setInvalid(codigo, 'error-codigo', 'Código rechazado: debe tener mayúscula, número y símbolo.');
+  valid = false;
+} else {
+  setValid(codigo);
+}
+
+const edad = document.getElementById('edad');
+const edadVal = Number(edad.value);
+
+if (!edad.value || isNaN(edadVal) || edadVal < 25 || edadVal > 50) {
+  setInvalid(edad, 'error-edad', 'Edad fuera del rango espacial (25-50).');
+  valid = false;
+} else {
+  setValid(edad);
+}
+
+const especialidadElems = Array.from(document.getElementsByName('especialidad'));
+const especialidadSeleccionada = especialidadElems.some(r => r.checked);
+
+if (!especialidadSeleccionada) {
+  document.getElementById('error-especialidad').textContent = 'Selecciona tu especialidad astronauta.';
+  especialidadElems.forEach(r => r.parentElement.classList.add('invalid'));
+  valid = false;
+} else {
+  especialidadElems.forEach(r => {
+    if (r.checked) r.parentElement.classList.add('valid');
+  });
+}
+
+const planeta = document.getElementById('planeta');
+if (!planeta.value) {
+  setInvalid(planeta, 'error-planeta', 'Selecciona tu planeta de origen.');
+  valid = false;
+} else {
+  setValid(planeta);
+}
+
+const fecha = document.getElementById('fecha');
+if (!fecha.value) {
+  setInvalid(fecha, 'error-fecha', 'Fecha inválida: debe ser futura.');
+  valid = false;
+} else {
+  const fechaVal = new Date(fecha.value);
+  const hoy = new Date();
+  hoy.setHours(0,0,0,0);
+  if (fechaVal <= hoy || isNaN(fechaVal.getTime())) {
+    setInvalid(fecha, 'error-fecha', 'Fecha inválida: debe ser futura.');
+    valid = false;
+  } else {
+    setValid(fecha);
+  }
+}
+
+const fisica = document.getElementById('fisica');
+const fisicaVal = Number(fisica.value);
+
+if (isNaN(fisicaVal) || fisicaVal < 7) {
+  setInvalid(fisica, 'error-fisica', 'Condición física insuficiente, mínimo 7.');
+  valid = false;
+} else {
+  setValid(fisica);
+}
+
+const expediente = document.getElementById('expediente');
+const file = expediente.files[0];
+
+if (!file) {
+  setInvalid(expediente, 'error-expediente', 'Sube un expediente médico en formato PDF.');
+  valid = false;
+} else {
+  const fileType = file.type;
+  const fileName = file.name || '';
+  const isPdfMime = fileType === 'application/pdf';
+  const isPdfExt = /\.pdf$/i.test(fileName);
+  if (!isPdfMime && !isPdfExt) {
+    setInvalid(expediente, 'error-expediente', 'Formato incorrecto: se requiere PDF.');
+    valid = false;
+  } else {
+    setValid(expediente);
+  }
+}
+
+const comentarios = document.getElementById('comentarios');
+const commVal = comentarios.value || '';
+if (commVal.trim().length > 0 && commVal.trim().length < 10) {
+  setInvalid(comentarios, 'error-comentarios', 'Comentarios demasiado cortos.');
+  valid = false;
+} else {
+  if (commVal.trim().length >= 10) setValid(comentarios);
+}
+
+const acepto = document.getElementById('acepto');
+if (!acepto.checked) {
+  document.getElementById('error-acepto').textContent = 'Debes aceptar los riesgos para continuar.';
+  valid = false;
+} else {
+  document.getElementById('error-acepto').textContent = '';
+}
+
+
+    const successDiv = document.getElementById('success-message');
+    if (valid) {
+      successDiv.textContent = '¡Todo ha sido correcto! Misión aprobada.'; 
+      
+    } else {
+      successDiv.textContent = ''; 
+    }
+  });
+
+  
+  function clearErrorsAndStyles() {
+    
+    const ids = ['nombre','email','codigo','edad','planeta','fecha','fisica','expediente','comentarios'];
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.classList.remove('valid','invalid');
+      }
+      const err = document.getElementById('error-' + id);
+      if (err) err.textContent = ''; 
+    });
+
+    
+    const especialidadElems = Array.from(document.getElementsByName('especialidad'));
+    especialidadElems.forEach(r => r.parentElement.classList.remove('valid','invalid'));
+    const errEsp = document.getElementById('error-especialidad');
+    if (errEsp) errEsp.textContent = '';
+
+    
+    const errAcep = document.getElementById('error-acepto');
+    if (errAcep) errAcep.textContent = '';
+
+
+    const successDiv = document.getElementById('success-message');
+    successDiv.textContent = '';
+  }
+
+
+  
+function setInvalid(element, errorId, message) {
+  element.classList.add('invalid');
+  const err = document.getElementById(errorId);
+  if (err) err.textContent = message;
+}
+
+function setValid(element) {
+  element.classList.add('valid');
+  const err = document.getElementById('error-' + element.id);
+  if (err) err.textContent = '';
+}
+
+});

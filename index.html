@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Formulario de Selección de Astronautas</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Formulario de Selección de Astronautas</h1>
+    <form id="astroForm" novalidate>
+      
+      <label for="nombre">Nombre completo:</label>
+      <input type="text" id="nombre" name="nombre" required minlength="3" />
+      <div class="error-message" id="error-nombre"></div>
+
+      
+      <label for="email">Correo de contacto:</label>
+      <input type="email" id="email" name="email" required />
+      <div class="error-message" id="error-email"></div>
+
+      
+      <label for="codigo">Código de seguridad:</label>
+      <input type="password" id="codigo" name="codigo" required minlength="8" />
+      <div class="error-message" id="error-codigo"></div>
+
+      
+      <label for="edad">Edad:</label>
+      <input type="number" id="edad" name="edad" required min="25" max="50" />
+      <div class="error-message" id="error-edad"></div>
+
+      
+      <label>Especialidad:</label>
+      <div class="radio-group" id="especialidad-group">
+        <label><input type="radio" name="especialidad" value="piloto" /> Piloto</label>
+        <label><input type="radio" name="especialidad" value="ingeniero" /> Ingeniero</label>
+        <label><input type="radio" name="especialidad" value="medico" /> Médico</label>
+        <label><input type="radio" name="especialidad" value="cientifico" /> Científico</label>
+      </div>
+      <div class="error-message" id="error-especialidad"></div>
+
+      
+      <label for="planeta">Planeta de origen:</label>
+      <select id="planeta" name="planeta" required>
+        <option value="">Selecciona tu planeta de origen</option>
+        <option value="mercurio">Mercurio</option>
+        <option value="venus">Venus</option>
+        <option value="tierra">Tierra</option>
+        <option value="marte">Marte</option>
+        <option value="jupiter">Júpiter</option>
+        <option value="saturno">Saturno</option>
+        <option value="urano">Urano</option>
+        <option value="neptuno">Neptuno</option>
+      </select>
+      <div class="error-message" id="error-planeta"></div>
+
+      
+      <label for="fecha">Fecha de disponibilidad para despegar:</label>
+      <input type="date" id="fecha" name="fecha" required />
+      <div class="error-message" id="error-fecha"></div>
+
+      
+      <label for="fisica">Nivel de condición física (1 a 10):</label>
+      <input type="range" id="fisica" name="fisica" min="1" max="10" value="1" />
+      <div class="error-message" id="error-fisica"></div>
+
+  
+      <label for="expediente">Expediente médico (PDF):</label>
+      <input type="file" id="expediente" name="expediente" accept="application/pdf" required />
+      <div class="error-message" id="error-expediente"></div>
+
+      <label for="comentarios">Comentarios adicionales (opcional):</label>
+      <textarea id="comentarios" name="comentarios" rows="3" minlength="10" placeholder="Si escribes algo, debe tener al menos 10 caracteres"></textarea>
+      <div class="error-message" id="error-comentarios"></div>
+
+      
+      <label><input type="checkbox" id="acepto" name="acepto" required /> Acepto los riesgos de la misión</label>
+      <div class="error-message" id="error-acepto"></div>
+
+      <button type="submit">Enviar</button>
+      <div class="success-message" id="success-message"></div>
+    </form>
+  </div>
+
+  <script src="validacion.js"></script>
+</body>
+</html>
