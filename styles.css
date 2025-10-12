@@ -1,0 +1,106 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: #fff;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  background-color: #222;
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 450px;
+}
+
+h1 {
+  text-align: center;
+  color: #5f9ea0;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 4px;
+  border: 2px solid #444;
+  background-color: #333;
+  color: white;
+  box-sizing: border-box;
+  font-size: 14px;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.radio-group label {
+  font-weight: normal;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+input[type="range"] {
+  width: 100%;
+  margin-top: 5px;
+}
+
+input[type="file"] {
+  margin-top: 5px;
+  color: white;
+}
+
+button {
+  margin-top: 25px;
+  width: 100%;
+  padding: 10px;
+  background-color: #5f9ea0;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #53868b;
+}
+
+
+.valid {
+  border-color: #4CAF50;
+  background-color: #2e7d32b3;
+}
+
+.invalid {
+  border-color: #f44336;
+  background-color: #b71c1c99;
+}
+
+
+.error-message {
+  color: #f44336;
+  font-size: 13px;
+  margin-top: 3px;
+}
+
+.success-message {
+  color: #4caf50;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 15px;
+  font-size: 16px;
+}
